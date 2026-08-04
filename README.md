@@ -50,17 +50,31 @@ it's running.
 2. Hold **Left Ctrl** and move your mouse over any text — button labels,
    paragraphs, tooltips, menu items, form fields.
 3. Release Left Ctrl to hide the popup.
-4. Right-click the tray icon → **Exit** to quit.
+4. Right-click the tray icon → **Options...** to tweak behavior, or
+   **Exit** to quit.
 
-## Customizing
+## Options
 
-Everything tunable lives in `Config.cs`:
-- `TriggerKey` — change to `0xA5` (Right Alt) or `0x14` (Caps Lock) etc.
-- `FontSize`, `MaxWidth` — popup appearance
-- `PollIntervalMs` — responsiveness vs. CPU usage
-- `CursorGapY` / `CursorGapAboveY` — vertical gap between the popup and the pointer
+Right-click the tray icon → **Options...**. Every change applies immediately
+and is saved to `%LocalAppData%\HoverText\settings.json`.
 
-Colors/border/shadow are in `OverlayWindow.xaml` if you want to restyle it.
+- **Trigger key** — switch the held modifier key (Left Ctrl / Right Ctrl /
+  Caps Lock / Right Alt / Left Alt). Re-applied live.
+- **Font size / Max width / Gap below cursor** — overlay sizing and how far
+  it sits from the pointer.
+- **Theme** — Dark (default) or Light.
+- **Keep overlay anchored over the same text** — on (default): the popup
+  stays put while the text under the cursor is unchanged, matching macOS.
+  Off: it always re-centers under the cursor.
+- **Copy hovered text to clipboard on release** — release the trigger to
+  copy whatever text was last shown.
+- **Launch at startup** — registers/unregisters the app under
+  `HKCU\...\CurrentVersion\Run`.
+
+Anything not exposed in the options window still lives in `Config.cs`:
+
+- `Config.cs` — every tunable constant (trigger key, poll interval, overlay
+  size, offsets, max text length). Change knobs here, not in the logic files.
 
 ## Known limitations (this is an MVP, not full parity)
 

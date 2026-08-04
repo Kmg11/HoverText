@@ -1,0 +1,61 @@
+<Window x:Class="HoverTextWin.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hover Text Options"
+        Width="430"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False">
+    <StackPanel Margin="14">
+        <GroupBox Header="Trigger key">
+            <StackPanel Margin="8">
+                <TextBlock Text="Hold this key to activate Hover Text:" Margin="0,0,0,6" />
+                <ComboBox x:Name="TriggerKeyCombo" SelectionChanged="TriggerKeyCombo_SelectionChanged" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Appearance" Margin="0,10,0,0">
+            <StackPanel Margin="8">
+                <DockPanel Margin="0,4">
+                    <TextBlock DockPanel.Dock="Left" Text="Font size:" VerticalAlignment="Center" />
+                    <TextBlock x:Name="FontSizeValueLabel" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    <Slider x:Name="FontSizeSlider" Minimum="16" Maximum="64" TickFrequency="2"
+                            IsSnapToTickEnabled="True" ValueChanged="FontSizeSlider_ValueChanged" />
+                </DockPanel>
+                <DockPanel Margin="0,4">
+                    <TextBlock DockPanel.Dock="Left" Text="Max width:" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MaxWidthValueLabel" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    <Slider x:Name="MaxWidthSlider" Minimum="200" Maximum="1200" TickFrequency="50"
+                            IsSnapToTickEnabled="True" ValueChanged="MaxWidthSlider_ValueChanged" />
+                </DockPanel>
+                <DockPanel Margin="0,4">
+                    <TextBlock DockPanel.Dock="Left" Text="Gap below cursor:" VerticalAlignment="Center" />
+                    <TextBlock x:Name="GapValueLabel" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    <Slider x:Name="GapSlider" Minimum="0" Maximum="80" TickFrequency="2"
+                            IsSnapToTickEnabled="True" ValueChanged="GapSlider_ValueChanged" />
+                </DockPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <RadioButton x:Name="DarkThemeRadio" Content="Dark" GroupName="Theme"
+                                 Checked="ThemeRadio_Checked" />
+                    <RadioButton x:Name="LightThemeRadio" Content="Light" GroupName="Theme"
+                                 Margin="12,0,0,0" Checked="ThemeRadio_Checked" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Behavior" Margin="0,10,0,0">
+            <StackPanel Margin="8">
+                <CheckBox x:Name="AnchorCheckBox" Content="Keep overlay anchored over the same text"
+                          Checked="BehaviorCheckBox_Checked" Unchecked="BehaviorCheckBox_Checked" />
+                <CheckBox x:Name="CopyCheckBox" Content="Copy hovered text to clipboard on release"
+                          Margin="0,6,0,0" Checked="BehaviorCheckBox_Checked" Unchecked="BehaviorCheckBox_Checked" />
+                <CheckBox x:Name="StartupCheckBox" Content="Launch at startup"
+                          Margin="0,6,0,0" Checked="BehaviorCheckBox_Checked" Unchecked="BehaviorCheckBox_Checked" />
+            </StackPanel>
+        </GroupBox>
+
+        <Button Content="Close" Width="90" HorizontalAlignment="Right" Margin="0,12,0,0" Click="Close_Click" />
+    </StackPanel>
+</Window>

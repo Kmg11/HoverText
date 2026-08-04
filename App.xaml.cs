@@ -9,24 +9,30 @@ namespace HoverTextWin
 {
     public partial class App : Application
     {
+        private Settings? _settings;
         private NotifyIcon? _trayIcon;
         private OverlayWindow? _overlay;
+        private OptionsWindow? _optionsWindow;
         private KeyboardHook? _hook;
         private DispatcherTimer? _pollTimer;
         private bool _modifierHeld;
+        private int _activeTriggerKey;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            _settings = Settings.Load();
+            _activeTriggerKey = _settings.TriggerKey;
+
             // Create the overlay and force its native window handle into
             // existence once (Show + immediate Hide), so click-through
             // styles are applied before it's ever actually shown to the user.
-            _overlay = new OverlayWindow();
+            _overlay = new OverlayWindow(_settings);
             _overlay.Show();
             _overlay.Hide();
 
-            _hook = new KeyboardHook(Config.TriggerKey);
+            _hook = new KeyboardHook(_settings.TriggerKey);
             _hook.KeyDown += OnTriggerKeyDown;
             _hook.KeyUp += OnTriggerKeyUp;
             _hook.Start();
@@ -51,6 +57,18 @@ namespace HoverTextWin
             _modifierHeld = false;
             _pollTimer!.Stop();
             _overlay!.HideOverlay();
+
+            if (_settings!.CopyOnRelease && !string.IsNullOrEmpty(_overlay.LastShownText))
+            {
+                try
+                {
+                    System.Windows.Clipboard.SetText(_overlay.LastShownText);
+                }
+                catch
+                {
+                    // Clipboard can be transiently locked by another app.
+                }
+            }
         }
 
         private void PollTimer_Tick(object? sender, EventArgs e)
@@ -75,14 +93,47 @@ namespace HoverTextWin
             {
                 Icon = SystemIcons.Application,
                 Visible = true,
-                Text = $"Hover Text (hold {Config.TriggerKeyDisplayName})"
+                Text = $"Hover Text (hold {_settings!.TriggerKeyDisplayName})"
             };
 
             var menu = new ContextMenuStrip();
-            menu.Items.Add($"Hold {Config.TriggerKeyDisplayName} + hover to zoom text", null, (_, _) => { }).Enabled = false;
+            menu.Items.Add("Options...", null, (_, _) => ShowOptionsWindow());
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("Exit", null, (_, _) => Shutdown());
             _trayIcon.ContextMenuStrip = menu;
+        }
+
+        private void ShowOptionsWindow()
+        {
+            if (_optionsWindow == null)
+            {
+                _optionsWindow = new OptionsWindow(_settings!);
+                _optionsWindow.SettingsChanged += OnSettingsChanged;
+                _optionsWindow.Closed += (_, _) => _optionsWindow = null;
+            }
+
+            _optionsWindow.Show();
+            _optionsWindow.Activate();
+        }
+
+        private void OnSettingsChanged()
+        {
+            if (_hook != null && _settings!.TriggerKey != _activeTriggerKey)
+            {
+                _hook.Stop();
+                _hook.KeyDown -= OnTriggerKeyDown;
+                _hook.KeyUp -= OnTriggerKeyUp;
+
+                _hook = new KeyboardHook(_settings.TriggerKey);
+                _hook.KeyDown += OnTriggerKeyDown;
+                _hook.KeyUp += OnTriggerKeyUp;
+                _hook.Start();
+
+                _activeTriggerKey = _settings.TriggerKey;
+            }
+
+            if (_trayIcon != null)
+                _trayIcon.Text = $"Hover Text (hold {_settings!.TriggerKeyDisplayName})";
         }
 
         protected override void OnExit(ExitEventArgs e)
