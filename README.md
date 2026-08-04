@@ -27,8 +27,8 @@ stays crisp at any size.
 ## Requirements
 
 - Windows 10 or 11
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
-- Visual Studio 2022 (recommended) or just the `dotnet` CLI
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- Visual Studio 2026 (recommended) or just the `dotnet` CLI
 - Internet access to restore the FlaUI NuGet packages on first build
 
 ## Build & run
