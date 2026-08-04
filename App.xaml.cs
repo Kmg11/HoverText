@@ -95,7 +95,7 @@ namespace HoverTextWin
         {
             _trayIcon = new NotifyIcon
             {
-                Icon = SystemIcons.Application,
+                Icon = LoadAppIcon(),
                 Visible = true,
                 Text = $"Hover Text (hold {_settings!.TriggerKeyDisplayName})"
             };
@@ -136,6 +136,26 @@ namespace HoverTextWin
 
             _optionsWindow.Show();
             _optionsWindow.Activate();
+        }
+
+        /// <summary>
+        /// Loads the embedded app icon for the tray. Falls back to the default
+        /// application icon if the resource is somehow missing.
+        /// </summary>
+        private static System.Drawing.Icon LoadAppIcon()
+        {
+            try
+            {
+                var info = System.Windows.Application.GetResourceStream(
+                    new Uri("pack://application:,,,/assets/app.ico"));
+                if (info != null) return new System.Drawing.Icon(info.Stream);
+            }
+            catch
+            {
+                // Fall through to the generic icon.
+            }
+
+            return SystemIcons.Application;
         }
 
         private void OnSettingsChanged()

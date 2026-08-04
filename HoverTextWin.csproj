@@ -11,7 +11,12 @@
     <AssemblyName>HoverTextWin</AssemblyName>
     <RootNamespace>HoverTextWin</RootNamespace>
     <StartupObject>HoverTextWin.App</StartupObject>
+    <ApplicationIcon>assets\app.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\app.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FlaUI.Core" Version="5.0.0" />
