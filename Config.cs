@@ -26,5 +26,13 @@ namespace HoverTextWin
 
         // Safety cap so a giant document element doesn't produce a wall of text.
         public const int MaxTextLength = 1500;
+
+        // How many levels up to search for a TextPattern host when reading a
+        // hyperlink (browsers expose the URL as the link's Name, not the text).
+        public const int MaxHyperlinkAncestorDepth = 10;
+
+        // A Name matching this pattern is treated as a link/URL rather than
+        // display text (e.g. a browser exposed the href as the element's Name).
+        public const string UrlNameRegex = @"^(https?://|www\.)\S+$";
     }
 }
