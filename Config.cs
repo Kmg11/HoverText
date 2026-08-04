@@ -19,10 +19,14 @@ namespace HoverTextWin
         public const double FontSize = 32;
         public const double MaxWidth = 700;
 
-        // Offset (px) from the actual cursor position so the popup doesn't
-        // sit directly under the mouse and obscure what you're pointing at.
-        public const int CursorOffsetX = 24;
-        public const int CursorOffsetY = 24;
+        // The overlay is centered horizontally below the cursor, this far down
+        // (px). Keeps the popup clear of the pointer so it doesn't obscure the
+        // text being read.
+        public const int CursorGapY = 24;
+
+        // When there's no room below the cursor, the overlay flips above it
+        // with this gap (px).
+        public const int CursorGapAboveY = 24;
 
         // Safety cap so a giant document element doesn't produce a wall of text.
         public const int MaxTextLength = 1500;

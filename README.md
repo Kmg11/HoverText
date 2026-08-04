@@ -58,7 +58,7 @@ Everything tunable lives in `Config.cs`:
 - `TriggerKey` — change to `0xA5` (Right Alt) or `0x14` (Caps Lock) etc.
 - `FontSize`, `MaxWidth` — popup appearance
 - `PollIntervalMs` — responsiveness vs. CPU usage
-- `CursorOffsetX/Y` — how far the popup sits from the pointer
+- `CursorGapY` / `CursorGapAboveY` — vertical gap between the popup and the pointer
 
 Colors/border/shadow are in `OverlayWindow.xaml` if you want to restyle it.
 
