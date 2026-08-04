@@ -8,7 +8,7 @@ pixel zoom.
 ## How it works
 
 1. `KeyboardHook.cs` installs a global low-level keyboard hook and fires
-   `KeyDown`/`KeyUp` when **Right Ctrl** (the default trigger) is
+   `KeyDown`/`KeyUp` when **Left Ctrl** (the default trigger) is
    pressed/released.
 2. While held, `App.xaml.cs` polls the cursor position every ~60ms
    (`GetCursorPos`).
@@ -47,9 +47,9 @@ it's running.
 ## Usage
 
 1. Launch the app (tray icon appears).
-2. Hold **Right Ctrl** and move your mouse over any text — button labels,
+2. Hold **Left Ctrl** and move your mouse over any text — button labels,
    paragraphs, tooltips, menu items, form fields.
-3. Release Right Ctrl to hide the popup.
+3. Release Left Ctrl to hide the popup.
 4. Right-click the tray icon → **Exit** to quit.
 
 ## Customizing

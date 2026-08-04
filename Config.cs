@@ -6,7 +6,7 @@ namespace HoverTextWin
     /// </summary>
     public static class Config
     {
-        // Virtual key code for the trigger/modifier key. Default: Right Ctrl.
+        // Virtual key code for the trigger/modifier key. Default: Left Ctrl.
         // Common alternatives: 0xA5 = VK_RMENU (Right Alt), 0x14 = VK_CAPITAL (Caps Lock).
         public const int TriggerKey = 0xA2; // VK_RCONTROL
         public const string TriggerKeyDisplayName = "Left Ctrl";
