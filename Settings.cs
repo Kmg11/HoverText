@@ -48,6 +48,9 @@ namespace HoverTextWin
         public bool CopyOnRelease { get; set; }
         public bool UseLightTheme { get; set; }
 
+        /// <summary>True once the first-launch onboarding screen has been dismissed.</summary>
+        public bool HasSeenOnboarding { get; set; }
+
         [JsonIgnore]
         public string TriggerKeyDisplayName
         {

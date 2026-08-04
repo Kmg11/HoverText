@@ -13,6 +13,7 @@ namespace HoverTextWin
         private NotifyIcon? _trayIcon;
         private OverlayWindow? _overlay;
         private OptionsWindow? _optionsWindow;
+        private OnboardingWindow? _onboardingWindow;
         private KeyboardHook? _hook;
         private DispatcherTimer? _pollTimer;
         private bool _modifierHeld;
@@ -44,6 +45,9 @@ namespace HoverTextWin
             _pollTimer.Tick += PollTimer_Tick;
 
             SetupTrayIcon();
+
+            if (!_settings.HasSeenOnboarding)
+                ShowOnboarding();
         }
 
         private void OnTriggerKeyDown()
@@ -98,9 +102,27 @@ namespace HoverTextWin
 
             var menu = new ContextMenuStrip();
             menu.Items.Add("Options...", null, (_, _) => ShowOptionsWindow());
+            menu.Items.Add("Getting Started", null, (_, _) => ShowOnboarding());
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add("Exit", null, (_, _) => Shutdown());
             _trayIcon.ContextMenuStrip = menu;
+        }
+
+        private void ShowOnboarding()
+        {
+            if (_onboardingWindow == null)
+            {
+                _onboardingWindow = new OnboardingWindow(_settings!);
+                _onboardingWindow.Completed += () =>
+                {
+                    _settings!.HasSeenOnboarding = true;
+                    _settings.Save();
+                };
+                _onboardingWindow.Closed += (_, _) => _onboardingWindow = null;
+            }
+
+            _onboardingWindow.Show();
+            _onboardingWindow.Activate();
         }
 
         private void ShowOptionsWindow()
