@@ -58,9 +58,14 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
-  // Drop the launch-at-startup value even if it was set from inside the app
-  // (the installer task only cleans up when it created the value itself).
   if CurUninstallStep = usUninstall then
+  begin
+    // Drop the launch-at-startup value even if it was set from inside the app
+    // (the installer task only cleans up when it created the value itself).
     RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'HoverText');
+    // Remove per-user settings so a reinstall starts fresh (first-run onboarding).
+    DeleteFile(ExpandConstant('{localappdata}\HoverText\settings.json'));
+    RemoveDir(ExpandConstant('{localappdata}\HoverText'));
+  end;
 end;
 
