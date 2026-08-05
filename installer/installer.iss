@@ -47,8 +47,8 @@ Source: "{#PublishDir}\{#AppExe}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#PublishDir}\*.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 
 [Icons]
-Name: "{autoprograms}\Hover Text"; Filename: "{app}\{#AppExe}"; IconFilename: "{app}\{#AppExe},0"
-Name: "{autoprograms}\Hover Text\Uninstall Hover Text"; Filename: "{uninstallexe}"; IconFilename: "{app}\{#AppExe},0"
+Name: "{autoprograms}\Hover Text"; Filename: "{app}\{#AppExe}"
+Name: "{autoprograms}\Hover Text\Uninstall Hover Text"; Filename: "{uninstallexe}"; IconFilename: "{app}\{#AppExe}"
 
 [Registry]
 ; Optional launch-with-Windows, chosen at install time. The in-app Options
