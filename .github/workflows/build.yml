@@ -28,11 +28,30 @@ jobs:
           -p:IncludeNativeLibrariesForSelfExtract=true
           -o publish
 
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Compile installer
+        shell: pwsh
+        run: |
+          $ver = if ($env:GITHUB_REF -match '^refs/tags/v(.+)$') { $Matches[1] } else { '1.0.0' }
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer\installer.iss `
+            /DAppVersion=$ver `
+            /DPublishDir=..\publish `
+            /DOutputDir=..\installer-out
+
       # actions/upload-artifact v7.0.1
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           path: publish/HoverTextWin.exe
+          archive: false
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          path: installer-out/*.exe
           archive: false
 
   release:
@@ -48,8 +67,16 @@ jobs:
         with:
           name: HoverTextWin.exe
 
+      - name: Download installer artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: installer
+          path: setup
+
       # softprops/action-gh-release v3.0.2
       - name: Create GitHub Release
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228
         with:
-          files: HoverTextWin.exe
+          files: |
+            HoverTextWin.exe
+            setup/*.exe

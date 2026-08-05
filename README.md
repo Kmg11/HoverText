@@ -44,6 +44,27 @@ dotnet run
 There's no visible main window — check the system tray for the icon once
 it's running.
 
+## Installer (Inno Setup)
+
+The repo ships a per-user installer (`installer/installer.iss`) that installs
+the app to `%LocalAppData%\Programs\HoverText`, adds a Start Menu shortcut,
+registers it in **Settings → Apps → Installed apps** for uninstall, and offers
+a "Launch with Windows" install-time checkbox.
+
+Build it locally (needs [Inno Setup](https://jrsoftware.org/isinfo.php), e.g.
+`winget install JRSoftware.InnoSetup`):
+
+```
+dotnet publish HoverTextWin.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o bin/Release/publish
+"C:\Users\<you>\AppData\Local\Programs\Inno Setup 6\ISCC.exe" installer\installer.iss /DAppVersion=1.0.0
+```
+
+Output: `bin\Release\installer\HoverTextSetup-<version>.exe`.
+
+GitHub Actions builds and attaches the installer to every `v*` release tag.
+The published exe is framework-dependent, so the target machine needs the
+[.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download).
+
 ## Usage
 
 1. Launch the app (tray icon appears).
