@@ -17,14 +17,14 @@ namespace HoverText
         private KeyboardHook? _hook;
         private DispatcherTimer? _pollTimer;
         private bool _modifierHeld;
-        private int _activeTriggerKey;
+        private int[] _activeTriggerKeys = Array.Empty<int>();
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             _settings = Settings.Load();
-            _activeTriggerKey = _settings.TriggerKey;
+            _activeTriggerKeys = _settings.TriggerKeys.ToArray();
 
             // Create the overlay and force its native window handle into
             // existence once (Show + immediate Hide), so click-through
@@ -33,7 +33,7 @@ namespace HoverText
             _overlay.Show();
             _overlay.Hide();
 
-            _hook = new KeyboardHook(_settings.TriggerKey);
+            _hook = new KeyboardHook(_settings.TriggerKeys);
             _hook.KeyDown += OnTriggerKeyDown;
             _hook.KeyUp += OnTriggerKeyUp;
             _hook.Start();
@@ -160,18 +160,18 @@ namespace HoverText
 
         private void OnSettingsChanged()
         {
-            if (_hook != null && _settings!.TriggerKey != _activeTriggerKey)
+            if (_hook != null && !_settings!.TriggerKeys.SequenceEqual(_activeTriggerKeys))
             {
                 _hook.Stop();
                 _hook.KeyDown -= OnTriggerKeyDown;
                 _hook.KeyUp -= OnTriggerKeyUp;
 
-                _hook = new KeyboardHook(_settings.TriggerKey);
+                _hook = new KeyboardHook(_settings.TriggerKeys);
                 _hook.KeyDown += OnTriggerKeyDown;
                 _hook.KeyUp += OnTriggerKeyUp;
                 _hook.Start();
 
-                _activeTriggerKey = _settings.TriggerKey;
+                _activeTriggerKeys = _settings.TriggerKeys.ToArray();
             }
 
             if (_trayIcon != null)

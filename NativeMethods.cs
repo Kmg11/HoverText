@@ -50,6 +50,46 @@ namespace HoverText
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr GetModuleHandle(string lpModuleName);
 
+        // ---------- Key names / capture ----------
+
+        // Reserved while recording a trigger: Enter finishes, Esc cancels.
+        public const int VK_RETURN = 0x0D;
+        public const int VK_ESCAPE = 0x1B;
+        public const int VK_PACKET = 0xE7;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetKeyNameText(IntPtr lParam, System.Text.StringBuilder lpString, int cchSize);
+
+        /// <summary>
+        /// Friendly, localized name for a virtual key code (e.g. "Ctrl",
+        /// "A", "Page Up"). Modifier keys get clean names regardless of side.
+        /// </summary>
+        public static string KeyName(int vkCode)
+        {
+            return vkCode switch
+            {
+                0xA0 or 0xA1 => "Shift",
+                0xA2 or 0xA3 => "Ctrl",
+                0xA4 or 0xA5 => "Alt",
+                0x5B or 0x5C => "Win",
+                _ => MapKeyName(vkCode)
+            };
+        }
+
+        private static string MapKeyName(int vkCode)
+        {
+            uint scan = MapVirtualKey((uint)vkCode, 0);
+            // lParam layout: scan code in bits 16-23, extended flag in bit 24.
+            var lParam = new IntPtr((long)(scan << 16) | 0x01000000);
+            var sb = new System.Text.StringBuilder(64);
+            if (GetKeyNameText(lParam, sb, sb.Capacity) > 0)
+                return sb.ToString();
+            return $"VK {vkCode}";
+        }
+
         // ---------- Click-through / tool-window styles for the overlay ----------
 
         public const int GWL_EXSTYLE = -20;

@@ -22,17 +22,12 @@ namespace HoverText
 
         private static readonly string SettingsPath = Path.Combine(SettingsDir, "settings.json");
 
-        /// <summary>Trigger keys offered in the options window.</summary>
-        public static readonly (string Name, int Vk)[] KnownTriggers =
-        {
-            ("Left Ctrl", 0xA2),
-            ("Right Ctrl", 0xA3),
-            ("Caps Lock", 0x14),
-            ("Right Alt", 0xA5),
-            ("Left Alt", 0xA4),
-        };
+        /// <summary>
+        /// Virtual-key codes that must be held together to activate Hover Text.
+        /// One key is the common case; a chord like Ctrl+Shift also works.
+        /// </summary>
+        public List<int> TriggerKeys { get; set; } = new() { Config.TriggerKey };
 
-        public int TriggerKey { get; set; } = Config.TriggerKey;
         public double FontSize { get; set; } = Config.FontSize;
         public double MaxWidth { get; set; } = Config.MaxWidth;
         public int CursorGapY { get; set; } = Config.CursorGapY;
@@ -52,14 +47,18 @@ namespace HoverText
         public bool HasSeenOnboarding { get; set; }
 
         [JsonIgnore]
-        public string TriggerKeyDisplayName
+        public string TriggerKeyDisplayName =>
+            string.Join(" + ", TriggerKeys.Select(NativeMethods.KeyName).Distinct());
+
+        /// <summary>
+        /// Ensures the trigger is never empty or duplicated (e.g. after
+        /// loading a hand-edited or older settings file).
+        /// </summary>
+        public void Normalize()
         {
-            get
-            {
-                foreach (var (name, vk) in KnownTriggers)
-                    if (vk == TriggerKey) return name;
-                return $"Key 0x{TriggerKey:X2}";
-            }
+            if (TriggerKeys == null || TriggerKeys.Count == 0)
+                TriggerKeys = new List<int> { Config.TriggerKey };
+            TriggerKeys = TriggerKeys.Distinct().ToList();
         }
 
         public static Settings Load()
@@ -69,7 +68,9 @@ namespace HoverText
                 if (!File.Exists(SettingsPath)) return new Settings();
                 var json = File.ReadAllText(SettingsPath);
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                return JsonSerializer.Deserialize<Settings>(json, options) ?? new Settings();
+                var settings = JsonSerializer.Deserialize<Settings>(json, options) ?? new Settings();
+                settings.Normalize();
+                return settings;
             }
             catch
             {

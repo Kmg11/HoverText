@@ -8,10 +8,23 @@
         WindowStartupLocation="CenterScreen"
         ShowInTaskbar="False">
     <StackPanel Margin="14">
-        <GroupBox Header="Trigger key">
+        <GroupBox Header="Trigger keys">
             <StackPanel Margin="8">
-                <TextBlock Text="Hold this key to activate Hover Text:" Margin="0,0,0,6" />
-                <ComboBox x:Name="TriggerKeyCombo" SelectionChanged="TriggerKeyCombo_SelectionChanged" />
+                <TextBlock Text="Hold these key(s) to activate Hover Text:" Margin="0,0,0,6" />
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="CancelTriggerButton" Content="Cancel" Width="72" Margin="6,0,0,0"
+                                Visibility="Collapsed" Click="CancelTrigger_Click" />
+                        <Button x:Name="ChangeTriggerButton" Content="Change..." Width="84" Margin="6,0,0,0"
+                                Click="ChangeTrigger_Click" />
+                    </StackPanel>
+                    <Border BorderBrush="#FF888888" BorderThickness="1" CornerRadius="3" Padding="8,4">
+                        <TextBlock x:Name="TriggerDisplay" VerticalAlignment="Center" />
+                    </Border>
+                </DockPanel>
+                <TextBlock x:Name="TriggerHint"
+                           Text="Press the Change button, then press the key or keys to use, then click Done."
+                           Foreground="#FF888888" TextWrapping="Wrap" Margin="0,6,0,0" />
             </StackPanel>
         </GroupBox>
 
