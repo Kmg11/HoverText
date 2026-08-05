@@ -79,8 +79,9 @@ The published exe is framework-dependent, so the target machine needs the
 Right-click the tray icon → **Options...**. Every change applies immediately
 and is saved to `%LocalAppData%\HoverText\settings.json`.
 
-- **Trigger key** — switch the held modifier key (Left Ctrl / Right Ctrl /
-  Caps Lock / Right Alt / Left Alt). Re-applied live.
+- **Trigger keys** — click **Change...** and press any key or chord you want
+  to hold (e.g. Left Ctrl, Ctrl+Shift). Enter finishes, Esc cancels.
+  Re-applied live.
 - **Font size / Max width / Gap below cursor** — overlay sizing and how far
   it sits from the pointer.
 - **Theme** — Dark (default) or Light.
@@ -119,10 +120,8 @@ Anything not exposed in the options window still lives in `Config.cs`:
 
 ## A note on testing
 
-This was written and reasoned through carefully, but built without access
-to a Windows machine or NuGet in this environment, so it hasn't been
-compiled here. The architecture and Win32/UIA usage are standard patterns,
-but if you hit a compile error on first build (most likely spot: exact
-FlaUI pattern-access syntax, which shifts slightly between major versions),
-check the [FlaUI docs](https://github.com/FlaUI/FlaUI/wiki) — it's almost
-always a one-line fix.
+This is an MVP with no automated tests; verification is "it compiles and
+runs". UIA quirks vary wildly across apps, so if you hit an app that yields
+no text, the likely culprits are FlaUI pattern access or an app that doesn't
+expose its UI tree.
+

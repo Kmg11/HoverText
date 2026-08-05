@@ -7,8 +7,7 @@ Windows-only, no tests, no CI, no lint config.
 
 ## Build & verify
 
-- Requires .NET 10 SDK (`net10.0-windows` target). The README's ".NET 8"
-  claim is stale — the csproj is the source of truth.
+- Requires .NET 10 SDK (`net10.0-windows` target).
 - Build: `dotnet build HoverText.slnx`
 - Run: `dotnet run` (or build + run `bin/Debug/net10.0-windows/HoverText.exe`)
 - There is no visible window. The app lives in the system tray; the only way
@@ -41,9 +40,8 @@ All files are in the project root:
 ## Gotchas
 
 - The default trigger is **Left Ctrl** (`Config.TriggerKey = 0xA2` =
-  `VK_LCONTROL`), but `Config.cs` comments and the README say "Left Ctrl".
-  That documentation is wrong; don't "fix" the constant to match it. Note
-  the user can now pick any key or chord via Options → Trigger keys; the
+  `VK_LCONTROL`), matching the README and `Config.cs` comments. Note the
+  user can now pick any key or chord via Options → Trigger keys; the
   constant is only the fallback default in `Settings.TriggerKeys`.
 - `OptionsWindow` records the trigger via a *second*, temporary
   `WH_KEYBOARD_LL` hook (`OptionsWindow.xaml.cs`). Enter finishes, Esc

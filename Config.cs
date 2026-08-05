@@ -6,9 +6,11 @@ namespace HoverText
     /// </summary>
     public static class Config
     {
-        // Virtual key code for the trigger/modifier key. Default: Left Ctrl.
+        // Fallback default trigger (0xA2 = VK_LCONTROL = Left Ctrl); only used
+        // when no settings file exists. Users can pick any key or chord via
+        // Options → Trigger keys; this is just the starting value.
         // Common alternatives: 0xA5 = VK_RMENU (Right Alt), 0x14 = VK_CAPITAL (Caps Lock).
-        public const int TriggerKey = 0xA2; // VK_RCONTROL
+        public const int TriggerKey = 0xA2;
 
         // How often (ms) to re-check the element under the cursor while the
         // trigger key is held. Lower = more responsive, higher = less CPU.
