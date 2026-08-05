@@ -32,6 +32,8 @@ OutputBaseFilename=HoverTextSetup-{#AppVersion}
 Compression=lzma2
 SolidCompression=yes
 SetupIconFile=..\assets\app.ico
+WizardImageFile=WizardImage.bmp
+WizardSmallImageFile=WizardSmallImage.bmp
 UninstallDisplayIcon={app}\{#AppExe},0
 UninstallDisplayName=Hover Text
 CloseApplications=yes
@@ -54,6 +56,9 @@ Name: "{autoprograms}\Hover Text\Uninstall Hover Text"; Filename: "{uninstallexe
 ; Optional launch-with-Windows, chosen at install time. The in-app Options
 ; screen can toggle the same value later.
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "HoverText"; ValueData: """{app}\{#AppExe}"""; Flags: uninsdeletevalue; Tasks: startup
+
+[Run]
+Filename: "{app}\{#AppExe}"; Description: "Launch Hover Text"; WorkingDir: "{app}"; Flags: nowait postinstall
 
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
