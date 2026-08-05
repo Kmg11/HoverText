@@ -35,7 +35,8 @@ namespace HoverText
             var newStyle = exStyle
                             | NativeMethods.WS_EX_LAYERED
                             | NativeMethods.WS_EX_TRANSPARENT
-                            | NativeMethods.WS_EX_TOOLWINDOW;
+                            | NativeMethods.WS_EX_TOOLWINDOW
+                            | NativeMethods.WS_EX_NOACTIVATE;
 
             NativeMethods.SetWindowLongPtr(hwnd, NativeMethods.GWL_EXSTYLE, new IntPtr(newStyle));
             _clickThroughApplied = true;
