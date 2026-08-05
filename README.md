@@ -1,4 +1,4 @@
-# HoverTextWin — MVP
+# Hover Text
 
 A Windows clone of macOS's Hover Text accessibility feature. Hold a modifier
 key, point at any text on screen, and see it rendered large in a floating
@@ -55,7 +55,7 @@ Build it locally (needs [Inno Setup](https://jrsoftware.org/isinfo.php), e.g.
 `winget install JRSoftware.InnoSetup`):
 
 ```
-dotnet publish HoverTextWin.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o bin/Release/publish
+dotnet publish HoverText.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o bin/Release/publish
 "C:\Users\<you>\AppData\Local\Programs\Inno Setup 6\ISCC.exe" installer\installer.iss /DAppVersion=1.0.0
 ```
 
@@ -108,7 +108,7 @@ Anything not exposed in the options window still lives in `Config.cs`:
   not implemented here.
 - **Elevated (Admin) apps**: Windows blocks non-elevated processes from
   inspecting elevated ones. If you need this to work over an app running
-  as Administrator, run HoverTextWin as Administrator too.
+  as Administrator, run Hover Text as Administrator too.
 - No triple-press "lock" mode like Mac's Hover Text (toggle without holding
   the key down) — straightforward to add to `KeyboardHook` if wanted.
 - Font/weight/color of the *original* text isn't preserved — UIA gives you

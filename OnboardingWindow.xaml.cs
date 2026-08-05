@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// First-launch screen that walks the user through how Hover Text works.

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace HoverTextWin
+namespace HoverText
 {
     internal static class NativeMethods
     {

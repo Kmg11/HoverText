@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace HoverTextWin
+namespace HoverText
 {
     public partial class OverlayWindow : Window
     {

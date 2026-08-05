@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using Application = System.Windows.Application;
 
-namespace HoverTextWin
+namespace HoverText
 {
     public partial class App : Application
     {

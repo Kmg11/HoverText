@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Win32;
 
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// User-editable settings, persisted as JSON under
@@ -15,7 +15,7 @@ namespace HoverTextWin
     public sealed class Settings
     {
         private const string RunKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private const string RunValueName = "HoverTextWin";
+        private const string RunValueName = "HoverText";
 
         private static readonly string SettingsDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HoverText");

@@ -9,8 +9,8 @@ Windows-only, no tests, no CI, no lint config.
 
 - Requires .NET 10 SDK (`net10.0-windows` target). The README's ".NET 8"
   claim is stale — the csproj is the source of truth.
-- Build: `dotnet build HoverTextWin.slnx`
-- Run: `dotnet run` (or build + run `bin/Debug/net10.0-windows/HoverTextWin.exe`)
+- Build: `dotnet build HoverText.slnx`
+- Run: `dotnet run` (or build + run `bin/Debug/net10.0-windows/HoverText.exe`)
 - There is no visible window. The app lives in the system tray; the only way
   out is tray icon → **Exit**. `App.xaml` uses `ShutdownMode="OnExplicitShutdown"`.
 - Verification of any change = it compiles and runs; there are no tests.

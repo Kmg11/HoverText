@@ -1,4 +1,4 @@
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// All the tunable knobs for the MVP live here so you don't have to

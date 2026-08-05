@@ -1,12 +1,12 @@
-; Inno Setup script for Hover Text (HoverTextWin).
+; Inno Setup script for Hover Text.
 ; Build with:  dotnet publish ... -o bin/Release/publish
 ;              & "...\ISCC.exe" installer\installer.iss [/DAppVersion=x.y.z]
 ;
 ; Requires the published output in bin\Release\publish (single-file exe).
 
 #define AppName "Hover Text"
-#define AppExe "HoverTextWin.exe"
-#define AppPublisher "HoverTextWin"
+#define AppExe "HoverText.exe"
+#define AppPublisher "Hover Text"
 #define AppId "{{B5F0C7E4-4C0F-4F6A-9A6E-8D0B1E4F2C31}"
 #ifndef AppVersion
   #define AppVersion "1.0.0"
@@ -53,7 +53,7 @@ Name: "{autoprograms}\Hover Text\Uninstall Hover Text"; Filename: "{uninstallexe
 [Registry]
 ; Optional launch-with-Windows, chosen at install time. The in-app Options
 ; screen can toggle the same value later.
-Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "HoverTextWin"; ValueData: """{app}\{#AppExe}"""; Flags: uninsdeletevalue; Tasks: startup
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "HoverText"; ValueData: """{app}\{#AppExe}"""; Flags: uninsdeletevalue; Tasks: startup
 
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
@@ -61,6 +61,6 @@ begin
   // Drop the launch-at-startup value even if it was set from inside the app
   // (the installer task only cleans up when it created the value itself).
   if CurUninstallStep = usUninstall then
-    RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'HoverTextWin');
+    RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'HoverText');
 end;
 

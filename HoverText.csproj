@@ -8,9 +8,9 @@
     <!-- WindowsForms is only used for the tray (NotifyIcon) -->
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>HoverTextWin</AssemblyName>
-    <RootNamespace>HoverTextWin</RootNamespace>
-    <StartupObject>HoverTextWin.App</StartupObject>
+    <AssemblyName>HoverText</AssemblyName>
+    <RootNamespace>HoverText</RootNamespace>
+    <StartupObject>HoverText.App</StartupObject>
     <ApplicationIcon>assets\app.ico</ApplicationIcon>
   </PropertyGroup>
 

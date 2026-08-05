@@ -22,7 +22,7 @@ jobs:
 
       - name: Publish single-file EXE
         run: >
-          dotnet publish HoverTextWin.csproj -c Release -r win-x64
+          dotnet publish HoverText.csproj -c Release -r win-x64
           --self-contained false
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          path: publish/HoverTextWin.exe
+          path: publish/HoverText.exe
           archive: false
 
       - name: Upload installer artifact
@@ -65,7 +65,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
-          name: HoverTextWin.exe
+          name: HoverText.exe
 
       - name: Download installer artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
@@ -78,5 +78,5 @@ jobs:
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228
         with:
           files: |
-            HoverTextWin.exe
+            HoverText.exe
             setup/*.exe

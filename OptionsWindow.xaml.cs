@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// Write-through options form: every control change is saved to the

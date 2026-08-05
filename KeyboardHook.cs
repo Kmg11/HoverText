@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// Global low-level keyboard hook that raises KeyDown/KeyUp for a single

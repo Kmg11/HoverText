@@ -4,7 +4,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.UIA3;
 
-namespace HoverTextWin
+namespace HoverText
 {
     /// <summary>
     /// Wraps Windows UI Automation to pull the most useful text out of
