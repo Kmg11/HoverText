@@ -23,9 +23,11 @@ jobs:
       - name: Publish single-file EXE
         run: >
           dotnet publish HoverText.csproj -c Release -r win-x64
-          --self-contained false
+          --self-contained true
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:DebugType=None
+          -p:DebugSymbols=false
           -o publish
 
       - name: Install Inno Setup

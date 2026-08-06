@@ -22,7 +22,7 @@ set "VER=%~1"
 if "%VER%"=="" set "VER=1.0.0"
 
 echo Building single-file publish...
-dotnet publish HoverText.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o bin\Release\publish
+dotnet publish HoverText.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o bin\Release\publish
 if errorlevel 1 exit /b 1
 
 echo Compiling installer v%VER%...
