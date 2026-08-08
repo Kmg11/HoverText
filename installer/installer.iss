@@ -52,6 +52,9 @@ Source: "{#PublishDir}\*.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsour
 Name: "{autoprograms}\Hover Text"; Filename: "{app}\{#AppExe}"
 Name: "{autoprograms}\Hover Text\Uninstall Hover Text"; Filename: "{uninstallexe}"; IconFilename: "{app}\{#AppExe}"
 
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}"
+
 [Registry]
 ; Optional launch-with-Windows, chosen at install time. The in-app Options
 ; screen can toggle the same value later.
@@ -61,6 +64,17 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 Filename: "{app}\{#AppExe}"; Description: "Launch Hover Text"; WorkingDir: "{app}"; Flags: nowait postinstall
 
 [Code]
+function InitializeUninstall(): Boolean;
+var
+  ErrorCode: Integer;
+begin
+  Result := True;
+  // The tray app has no window, so CloseApplications/Restart Manager won't
+  // see it and the exe would be locked during file deletion. Force-kill it
+  // before [UninstallDelete] runs. taskkill fails harmlessly if not running.
+  Exec('taskkill.exe', '/F /IM {#AppExe}', '', SW_HIDE, ewWaitUntilTerminated, ErrorCode);
+end;
+
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if CurUninstallStep = usUninstall then
