@@ -16,6 +16,11 @@ namespace HoverText
         // trigger key is held. Lower = more responsive, higher = less CPU.
         public const int PollIntervalMs = 60;
 
+        // The trigger chord must be held cleanly this long (ms) before Hover
+        // Text engages. Gives shortcuts like Ctrl+C / Ctrl+Alt+Wheel time to
+        // be recognized so the overlay doesn't flash for unrelated holds.
+        public const int ActivationDelayMs = 100;
+
         // Overlay appearance
         public const double FontSize = 32;
         public const double MaxWidth = 700;

@@ -14,12 +14,21 @@ namespace HoverText
     {
         private readonly HashSet<int> _vkCodes;
         private readonly HashSet<int> _held = new();
+        private readonly HashSet<int> _otherHeld = new();
         private readonly NativeMethods.LowLevelKeyboardProc _proc;
         private IntPtr _hookId = IntPtr.Zero;
         private bool _allDown;
+        private bool _suppressed;
 
         public event Action? KeyDown;
         public event Action? KeyUp;
+
+        /// <summary>
+        /// Raised when a key outside the trigger chord is pressed while the
+        /// chord is held — the chord is being used for another shortcut, so
+        /// Hover Text must back off for this entire hold.
+        /// </summary>
+        public event Action? KeyCancelled;
 
         public KeyboardHook(IEnumerable<int> vkCodes)
         {
@@ -55,7 +64,9 @@ namespace HoverText
                 _hookId = IntPtr.Zero;
             }
             _held.Clear();
+            _otherHeld.Clear();
             _allDown = false;
+            _suppressed = false;
         }
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
@@ -63,24 +74,59 @@ namespace HoverText
             if (nCode >= 0)
             {
                 var info = Marshal.PtrToStructure<NativeMethods.KBDLLHOOKSTRUCT>(lParam);
+                int vk = info.vkCode;
+                int msg = wParam.ToInt32();
+                bool down = msg == NativeMethods.WM_KEYDOWN || msg == NativeMethods.WM_SYSKEYDOWN;
+                bool up = msg == NativeMethods.WM_KEYUP || msg == NativeMethods.WM_SYSKEYUP;
 
-                if (_vkCodes.Contains(info.vkCode))
+                if (down || up)
                 {
-                    int msg = wParam.ToInt32();
-                    bool down = msg == NativeMethods.WM_KEYDOWN || msg == NativeMethods.WM_SYSKEYDOWN;
-                    bool up = msg == NativeMethods.WM_KEYUP || msg == NativeMethods.WM_SYSKEYUP;
+                    if (_vkCodes.Contains(vk))
+                    {
+                        // _held.Add returns false on auto-repeat, so the chord
+                        // transition fires only when the last required key goes down.
+                        if (down && _held.Add(vk) && _held.Count == _vkCodes.Count && !_allDown)
+                        {
+                            _allDown = true;
 
-                    // _held.Add returns false on auto-repeat, so the chord
-                    // transition fires only when the last required key goes down.
-                    if (down && _held.Add(info.vkCode) && _held.Count == _vkCodes.Count && !_allDown)
-                    {
-                        _allDown = true;
-                        KeyDown?.Invoke();
+                            // If an extra key was already held when the chord
+                            // completed (e.g. X pressed a moment before Ctrl),
+                            // this is a shortcut — don't engage Hover Text.
+                            if (_suppressed || _otherHeld.Count > 0)
+                                _suppressed = true;
+                            else
+                                KeyDown?.Invoke();
+                        }
+                        else if (up && _held.Remove(vk))
+                        {
+                            bool wasActive = _allDown;
+                            _allDown = false;
+                            if (wasActive)
+                                KeyUp?.Invoke();
+                            if (_held.Count == 0)
+                                _suppressed = false;
+                        }
                     }
-                    else if (up && _held.Remove(info.vkCode) && _allDown)
+                    else if (vk != NativeMethods.VK_PACKET)
                     {
-                        _allDown = false;
-                        KeyUp?.Invoke();
+                        if (down)
+                        {
+                            _otherHeld.Add(vk);
+
+                            // Chord is active and a non-trigger key went down:
+                            // the user is invoking another shortcut (Ctrl+C,
+                            // Ctrl+Alt+Wheel, ...). Cancel this hold.
+                            if (_allDown && !_suppressed)
+                            {
+                                _suppressed = true;
+                                _allDown = false;
+                                KeyCancelled?.Invoke();
+                            }
+                        }
+                        else if (up)
+                        {
+                            _otherHeld.Remove(vk);
+                        }
                     }
                 }
             }
