@@ -23,4 +23,44 @@
     <PackageReference Include="FlaUI.UIA3" Version="5.0.0" />
   </ItemGroup>
 
+  <!--
+    Custom build shortcuts (the npm-script equivalent for this project).
+      dotnet build -t:PublishInstaller   -> single-file publish to publish/
+      dotnet build -t:BuildInstaller      -> publish + compile Inno Setup installer
+      dotnet build -t:BuildInstaller -p:AppVersion=0.0.2
+    Note: `dotnet build` with -t: only runs the named target, not Build.
+  -->
+
+  <PropertyGroup>
+    <PublishDir>$(MSBuildProjectDirectory)\publish</PublishDir>
+    <InstallerOutDir>$(MSBuildProjectDirectory)\bin\Release\installer</InstallerOutDir>
+  </PropertyGroup>
+
+  <!-- Locate ISCC: machine-wide (CI) or per-user choco install (local dev). -->
+  <Choose>
+    <When Condition="Exists('C:\Program Files (x86)\Inno Setup 6\ISCC.exe')">
+      <PropertyGroup><ISCCPath>C:\Program Files (x86)\Inno Setup 6\ISCC.exe</ISCCPath></PropertyGroup>
+    </When>
+    <When Condition="Exists('$(LocalAppData)\Programs\Inno Setup 6\ISCC.exe')">
+      <PropertyGroup><ISCCPath>$(LocalAppData)\Programs\Inno Setup 6\ISCC.exe</ISCCPath></PropertyGroup>
+    </When>
+  </Choose>
+  <PropertyGroup Condition="'$(ISCCPath)' == ''">
+    <ISCCPath>ISCC.exe</ISCCPath>
+  </PropertyGroup>
+
+  <Target Name="PublishInstaller" DependsOnTargets="Restore">
+    <PropertyGroup>
+      <PublishArgs>-c Release -r win-x64 --self-contained true -o &quot;$(PublishDir)&quot;</PublishArgs>
+    </PropertyGroup>
+    <Exec Command="dotnet publish &quot;$(MSBuildProjectFullPath)&quot; $(PublishArgs)" />
+  </Target>
+
+  <Target Name="BuildInstaller" DependsOnTargets="PublishInstaller">
+    <PropertyGroup>
+      <AppVersion Condition="'$(AppVersion)' == ''">1.0.0</AppVersion>
+    </PropertyGroup>
+    <Exec Command="&quot;$(ISCCPath)&quot; &quot;$(MSBuildProjectDirectory)\installer\installer.iss&quot; /DAppVersion=$(AppVersion) /DPublishDir=&quot;..\publish&quot; /DOutputDir=&quot;..\bin\Release\installer&quot;" />
+  </Target>
+
 </Project>
