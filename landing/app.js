@@ -16,29 +16,40 @@
     let pointerY = 0;
     let pointerInScreen = false;
 
-    const OFFSET_X = 24;
-    const OFFSET_Y = 18;
+    const GAP_Y = 24;
+    const GAP_ABOVE_Y = 24;
 
     function updatePopup() {
-        const show = ctrlDown && pointerInScreen && popupTextContent;
         if (!popup) return;
+        const show = ctrlDown && pointerInScreen && popupTextContent;
         popup.classList.toggle("visible", !!show);
-        if (show && popupText) popupText.textContent = popupTextContent;
     }
 
+    function setPopupText(text) {
+        if (popupText) popupText.textContent = text;
+    }
+
+    // Mirrors OverlayWindow.xaml.cs: the overlay centers horizontally under
+    // the cursor, sits GAP_Y below it, flips above with GAP_ABOVE_Y when it
+    // would run off the bottom, and is clamped to the screen edges.
     function positionPopup() {
         if (!popup || !screen) return;
         const rect = screen.getBoundingClientRect();
-        let x = pointerX - rect.left + OFFSET_X;
-        let y = pointerY - rect.top + OFFSET_Y;
         const w = popup.offsetWidth;
         const h = popup.offsetHeight;
-        if (x + w > rect.width - 10) x = pointerX - rect.left - w - OFFSET_X;
-        if (x < 10) x = 10;
-        if (y + h > rect.height - 10) y = pointerY - rect.top - h - OFFSET_Y;
-        if (y < 10) y = 10;
-        popup.style.left = x + "px";
-        popup.style.top = y + "px";
+        const cx = pointerX - rect.left;
+        const cy = pointerY - rect.top;
+
+        let left = cx - w / 2;
+        if (left < 0) left = 0;
+        else if (left + w > rect.width) left = rect.width - w;
+
+        let top = cy + GAP_Y;
+        if (top + h > rect.height) top = cy - GAP_ABOVE_Y - h;
+        if (top < 0) top = 0;
+
+        popup.style.left = left + "px";
+        popup.style.top = top + "px";
     }
 
     function updateFromPointer() {
@@ -54,12 +65,22 @@
             const hit = el && el.closest("[data-hover-text]");
             text = hit ? hit.getAttribute("data-hover-text") : "";
         }
+
+        const textChanged = text !== popupTextContent;
         popupTextContent = text;
-        updatePopup();
-        if (popup) {
-            if (text) positionPopup();
-            else popup.style.left = popup.style.top = "";
+
+        // The real overlay anchors in place and only re-positions when the
+        // text under the cursor actually changes (OverlayWindow.xaml.cs).
+        if (textChanged) {
+            if (text) {
+                setPopupText(text);
+                positionPopup();
+            } else {
+                popup.style.left = popup.style.top = "";
+            }
         }
+
+        updatePopup();
     }
 
     window.addEventListener("mousemove", (e) => {
