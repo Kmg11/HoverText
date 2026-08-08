@@ -58,35 +58,53 @@
                     </ul>
                 </div>
 
-                <div class="hero-visual" aria-hidden="true">
-                    <div class="fake-window">
-                        <div class="fake-window-bar">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                            <span class="fake-window-title">Example App</span>
-                        </div>
-                        <div class="fake-content">
-                            <div class="fake-card">
-                                <p class="fake-label">STATUS</p>
-                                <p class="fake-heading">Connected</p>
-                                <p class="fake-body">Your workspace is up to date.</p>
-                                <div class="fake-tags">
-                                    <span>Sync complete</span>
-                                    <span>Auto-backup on</span>
+                <div class="hero-visual">
+                    <div class="screen">
+                        <div class="browser">
+                            <div class="browser-tabs">
+                                <div class="browser-tab is-active" data-hover-text="Hover Text — Home">
+                                    <span class="tab-dot"></span>
+                                    <span class="tab-title">Hover Text — Home</span>
                                 </div>
-                                <button class="fake-button">Save changes</button>
+                                <div class="browser-tab" data-hover-text="Features">
+                                    <span class="tab-dot"></span>
+                                    <span class="tab-title">Features</span>
+                                </div>
+                                <div class="browser-tab" data-hover-text="Docs">
+                                    <span class="tab-dot"></span>
+                                    <span class="tab-title">Docs</span>
+                                </div>
+                                <button class="tab-new" aria-hidden="true">+</button>
                             </div>
-                            <div class="fake-sidebar">
-                                <span class="fake-side-item"></span>
-                                <span class="fake-side-item"></span>
-                                <span class="fake-side-item"></span>
+                            <div class="browser-toolbar">
+                                <div class="browser-controls">
+                                    <span class="browser-btn" data-hover-text="Back">&#8592;</span>
+                                    <span class="browser-btn" data-hover-text="Forward">&#8594;</span>
+                                    <span class="browser-btn" data-hover-text="Reload">&#8635;</span>
+                                </div>
+                                <div class="browser-address" data-hover-text="hovertext.app">
+                                    <span class="address-icon" aria-hidden="true"></span>
+                                    hovertext.app
+                                </div>
+                            </div>
+                            <div class="browser-body">
+                                <p class="screen-page-title" data-hover-text="Hover Text">Hover Text</p>
+                                <h3 class="screen-heading" data-hover-text="Read any on-screen text, huge and clear">
+                                    Read any on-screen text, huge and clear
+                                </h3>
+                                <p class="screen-text" data-hover-text="Hold Left Ctrl and point your pointer at any text on screen. A large, crisp copy appears right next to the cursor — sharp at any size, from any app.">
+                                    Hold <mark class="spot">Left Ctrl</mark> and point your pointer at any text on
+                                    screen. A large, crisp copy appears right next to the cursor —
+                                    sharp at any size, from any app.
+                                </p>
+                                <p class="screen-text" data-hover-text="Tooltips, button labels, menus, form fields — if the app exposes text, Hover Text can read it. Nothing is uploaded; it all stays on your machine.">
+                                    Tooltips, button labels, menus, form fields — if the app exposes text,
+                                    Hover Text can read it. Nothing is uploaded; it all stays on your machine.
+                                </p>
                             </div>
                         </div>
-                        <div class="fake-cursor"></div>
-                        <div class="fake-overlay">
-                            <span class="fake-overlay-title">Save changes</span>
-                            <span class="fake-overlay-text">Save changes</span>
+                        <div class="hover-popup" role="presentation">
+                            <span class="hover-popup-text"></span>
                         </div>
                     </div>
                 </div>
