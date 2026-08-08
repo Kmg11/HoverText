@@ -539,6 +539,62 @@ section { padding: 84px 0; }
 
 .download-note { color: var(--text-faint); font-size: 0.85rem; min-height: 1.2em; }
 
+/* ---------- About the creator ---------- */
+
+.about { padding-bottom: 100px; }
+
+.about-box {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.about-box .eyebrow { margin-bottom: 10px; }
+.about-box .section-title { margin-bottom: 18px; }
+
+.about-text {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 42em;
+    margin: 0 auto 32px;
+}
+
+.about-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 26px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background: var(--bg-card);
+    transition: border-color 0.15s ease, background 0.15s ease,
+                transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.social-btn svg { flex-shrink: 0; color: var(--text-dim); transition: color 0.15s ease; }
+
+.social-btn:hover {
+    border-color: #3B4A63;
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.social-btn:hover svg { color: var(--accent); }
+
+.social-btn:active { transform: translateY(0); }
+
 /* ---------- Footer ---------- */
 
 .site-footer {
