@@ -1,6 +1,6 @@
 # Privacy Policy — Hover Text
 
-**Effective date:** [Date]
+**Effective date:** August 6, 2026
 
 ## Overview
 
