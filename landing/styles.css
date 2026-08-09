@@ -75,6 +75,24 @@ body {
 
 .btn-store:hover:not(.is-disabled) { border-color: var(--accent); }
 
+.btn-versions {
+    border: 1px dashed var(--border);
+    color: var(--text-dim);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-versions svg { flex-shrink: 0; }
+
+.btn-versions:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: var(--bg-elev);
+}
+
 .btn.is-disabled {
     opacity: 0.55;
     cursor: not-allowed;
@@ -540,11 +558,9 @@ section { padding: 84px 0; }
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 16px;
-    margin-bottom: 18px;
 }
-
-.download-note { color: var(--text-faint); font-size: 0.85rem; min-height: 1.2em; }
 
 /* ---------- About the creator ---------- */
 
@@ -694,6 +710,11 @@ section { padding: 84px 0; }
     .feature-list { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .hero { padding: 56px 0 72px; }
+    .hero-visual { display: none; }
     section { padding: 64px 0; }
     .legal-box { padding: 32px 24px; }
+}
+
+@media (pointer: coarse) {
+    .hero-visual { display: none; }
 }
