@@ -23,8 +23,7 @@ namespace HoverText
 
         /// <summary>
         /// Applies WS_EX_TRANSPARENT so mouse clicks pass through the overlay
-        /// to whatever app is underneath — the overlay is purely visual,
-        /// same as Mac's Hover Text window.
+        /// to whatever app is underneath — the overlay is purely visual.
         /// </summary>
         private void MakeClickThrough()
         {
@@ -56,9 +55,9 @@ namespace HoverText
 
             // Keep the window anchored in place while the cursor moves around
             // within the same element; only re-position when the text under
-            // the cursor actually changes (macOS Hover Text behaves the same
-            // way — it doesn't chase the mouse on every move). Disabled from
-            // options, the overlay always follows the cursor.
+            // the cursor actually changes — it doesn't chase the mouse on
+            // every move. Disabled from options, the overlay always follows
+            // the cursor.
             if (_settings.AnchorPosition && !textChanged) return;
 
             // Force layout now so ActualWidth/Height reflect the new text

@@ -1,9 +1,9 @@
 # AGENTS.md
 
-WPF desktop app that clones macOS Hover Text: hold a modifier key, point at
-text, and a large always-on-top overlay shows the real text under the cursor
-(via Windows UI Automation/FlaUI, not a pixel zoom). Single-project .NET app,
-Windows-only, no tests, no CI, no lint config.
+WPF desktop app inspired by the Hover Text feature on Mac: hold a modifier
+key, point at text, and a large always-on-top overlay shows the real text under
+the cursor (via Windows UI Automation/FlaUI, not a pixel zoom). Single-project
+.NET app, Windows-only, no tests, no CI, no lint config.
 
 ## Build & verify
 

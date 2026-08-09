@@ -8,8 +8,8 @@ namespace HoverText
 {
     /// <summary>
     /// Wraps Windows UI Automation to pull the most useful text out of
-    /// whatever element sits under a given screen point. This is the
-    /// direct equivalent of what AXUIElement does on macOS for Hover Text.
+    /// whatever element sits under a given screen point. Re-renders the
+    /// accessible text content rather than zooming the screen.
     /// </summary>
     internal static class ElementTextExtractor
     {

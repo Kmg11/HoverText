@@ -7,8 +7,8 @@ namespace HoverText
     /// <summary>
     /// Global low-level keyboard hook that raises KeyDown when every watched
     /// key is held simultaneously and KeyUp when any of them is released.
-    /// This is how we detect the trigger modifier (or key chord) being held,
-    /// mirroring how macOS Hover Text watches for Command.
+    /// This is how we detect the trigger modifier (or key combination) being
+    /// held.
     /// </summary>
     public class KeyboardHook
     {

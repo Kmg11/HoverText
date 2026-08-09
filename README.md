@@ -1,9 +1,9 @@
 # Hover Text
 
-A Windows clone of macOS's Hover Text accessibility feature. Hold a modifier
-key, point at any text on screen, and see it rendered large in a floating
-overlay — using the real text content (via UI Automation), not a blurry
-pixel zoom.
+A Windows accessibility tool inspired by the Hover Text feature on Mac.
+Hold a modifier key, point at any text on screen, and see it rendered large
+in a floating overlay — using the real text content (via UI Automation),
+not a blurry pixel zoom.
 
 ## How it works
 
@@ -20,9 +20,8 @@ pixel zoom.
    always-on-top popup near the cursor.
 5. A tray icon lets you see it's running and exit.
 
-This mirrors the actual mechanism macOS uses (AXUIElement → re-render as
-text), rather than screen-zooming like Windows Magnifier does — so text
-stays crisp at any size.
+This re-renders the actual text content, rather than screen-zooming like
+Windows Magnifier does — so text stays crisp at any size.
 
 ## Requirements
 
@@ -86,8 +85,8 @@ and is saved to `%LocalAppData%\HoverText\settings.json`.
   it sits from the pointer.
 - **Theme** — Dark (default) or Light.
 - **Keep overlay anchored over the same text** — on (default): the popup
-  stays put while the text under the cursor is unchanged, matching macOS.
-  Off: it always re-centers under the cursor.
+  stays put while the text under the cursor is unchanged. Off: it always
+  re-centers under the cursor.
 - **Copy hovered text to clipboard on release** — release the trigger to
   copy whatever text was last shown.
 - **Launch at startup** — registers/unregisters the app under
@@ -110,13 +109,13 @@ Anything not exposed in the options window still lives in `Config.cs`:
 - **Elevated (Admin) apps**: Windows blocks non-elevated processes from
   inspecting elevated ones. If you need this to work over an app running
   as Administrator, run Hover Text as Administrator too.
-- No triple-press "lock" mode like Mac's Hover Text (toggle without holding
-  the key down) — straightforward to add to `KeyboardHook` if wanted.
+- No triple-press "lock" mode (toggle without holding the key down) —
+  straightforward to add to `KeyboardHook` if wanted.
 - Font/weight/color of the *original* text isn't preserved — UIA gives you
   the string content, not its original styling, so everything renders in
-  the overlay's own font (same tradeoff Mac's Hover Text makes, incidentally).
-- No "Hover Color" equivalent (macOS's pointer-based color picker) — could
-  be added by sampling the pixel under the cursor with `GetPixel`.
+  the overlay's own font.
+- No pointer-based color picker — could be added by sampling the pixel
+  under the cursor with `GetPixel`.
 
 ## A note on testing
 
