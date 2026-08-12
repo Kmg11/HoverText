@@ -54,6 +54,20 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Extract release notes from CHANGELOG.md
+        shell: bash
+        run: |
+          VER="${GITHUB_REF#refs/tags/v}"
+          awk -v ver="$VER" '
+            $0 ~ "^## \\[" ver "\\]" { capture=1; next }
+            capture && $0 ~ "^## \\[" { exit }
+            capture { print }
+          ' CHANGELOG.md > release_notes.md
+          test -s release_notes.md || echo "No changelog section for v$VER" >&2
+
       - name: Download installer artifact
         uses: actions/download-artifact@v8.0.1
         with:
@@ -63,5 +77,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3.0.2
         with:
+          body_path: release_notes.md
           files: |
             setup/*.exe
