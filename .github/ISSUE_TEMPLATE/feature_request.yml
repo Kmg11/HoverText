@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest an idea for Hover Text
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Some ideas are already tracked in the README's [Known limitations](https://github.com/Kmg11/HoverText#known-limitations-this-is-an-mvp-not-full-parity) (OCR fallback, triple-press lock mode, color picker) — comment there instead if it's one of those.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: What can't you do today that you'd like to?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior you'd like, and roughly how it should feel to use.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: e.g. a workaround, another app's behavior, or a setting you can adjust today.
+      placeholder: "e.g. I currently change the font size manually"
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, mockups, or links that help explain the request.
+      render: text

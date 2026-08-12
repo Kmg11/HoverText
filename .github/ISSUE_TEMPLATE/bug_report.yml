@@ -1,0 +1,84 @@
+name: Bug report
+description: Report a problem with Hover Text
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Before submitting, check the [Known limitations](https://github.com/Kmg11/HoverText#known-limitations-this-is-an-mvp-not-full-parity) in the README — some apps (Electron/Chromium, canvas-rendered, elevated/admin) have known gaps that aren't bugs.
+
+  - type: input
+    id: version
+    attributes:
+      label: Hover Text version
+      description: Where did you install it from (Store, GitHub release, or built yourself), and what version?
+      placeholder: e.g. 1.0.0 from the Microsoft Store
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      description: e.g. Windows 11 24H2, Windows 10 22H2
+      placeholder: "e.g. Windows 11 23H2"
+    validations:
+      required: true
+
+  - type: input
+    id: app
+    attributes:
+      label: App(s) where it happens
+      description: Which app's text were you hovering over?
+      placeholder: "e.g. Notepad, Visual Studio, Chrome"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you do? Include your trigger key(s) if you changed them.
+      placeholder: |
+        1. Launch Hover Text
+        2. Hold Left Ctrl and hover over ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: Overlay font size, max width, gap, theme, anchored mode, clipboard-copy, trigger keys — anything you changed from defaults.
+      placeholder: "e.g. font size 32, dark theme, Left Ctrl"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Optional. A screenshot of the overlay misbehaving can help a lot.
+      render: text
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I checked the Known limitations section and this isn't a listed gap
+        - label: I tried the latest release
