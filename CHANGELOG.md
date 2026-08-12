@@ -13,7 +13,6 @@ All notable changes to this project will be documented in this file.
 - Holding the trigger key no longer clashes with other shortcuts
   (Ctrl+C, Ctrl+Alt+Wheel) — the overlay backs off instead of flashing.
 - Uninstall now fully removes the app folder and settings.
-- Cleaned up documentation; removed Mac/Apple references throughout.
 
 ## [0.0.1] - 2026-08-08
 

@@ -63,19 +63,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3.0.2
         with:
-          body: |
-            ## What's new
-            - Brand-new landing page with an interactive demo: hold Left Ctrl
-              and hover over the browser mockup to see the overlay work live.
-            - "About the creator" section with GitHub and LinkedIn links.
-
-            ## Fixes
-            - Holding the trigger key no longer clashes with other shortcuts
-              (Ctrl+C, Ctrl+Alt+Wheel) — the overlay backs off instead of flashing.
-            - Uninstall now fully removes the app folder and settings.
-            - Cleaned up documentation; removed Mac/Apple references throughout.
-
-            ## Download
-            - Windows installer: HoverTextSetup-0.0.2.exe
           files: |
             setup/*.exe

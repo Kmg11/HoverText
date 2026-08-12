@@ -1,6 +1,6 @@
 # Hover Text
 
-A Windows accessibility tool inspired by the Hover Text feature on Mac.
+A Windows accessibility tool.
 Hold a modifier key, point at any text on screen, and see it rendered large
 in a floating overlay — using the real text content (via UI Automation),
 not a blurry pixel zoom.
@@ -35,6 +35,7 @@ Windows Magnifier does — so text stays crisp at any size.
 **Visual Studio:** open the folder, let it restore NuGet packages, press F5.
 
 **CLI:**
+
 ```
 dotnet restore
 dotnet run
@@ -61,8 +62,6 @@ dotnet publish HoverText.csproj -c Release -r win-x64 --self-contained false -p:
 Output: `bin\Release\installer\HoverTextSetup-<version>.exe`.
 
 GitHub Actions builds and attaches the installer to every `v*` release tag.
-The published exe is framework-dependent, so the target machine needs the
-[.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download).
 
 ## Usage
 
@@ -111,7 +110,7 @@ Anything not exposed in the options window still lives in `Config.cs`:
   as Administrator, run Hover Text as Administrator too.
 - No triple-press "lock" mode (toggle without holding the key down) —
   straightforward to add to `KeyboardHook` if wanted.
-- Font/weight/color of the *original* text isn't preserved — UIA gives you
+- Font/weight/color of the _original_ text isn't preserved — UIA gives you
   the string content, not its original styling, so everything renders in
   the overlay's own font.
 - No pointer-based color picker — could be added by sampling the pixel
@@ -123,4 +122,3 @@ This is an MVP with no automated tests; verification is "it compiles and
 runs". UIA quirks vary wildly across apps, so if you hit an app that yields
 no text, the likely culprits are FlaUI pattern access or an app that doesn't
 expose its UI tree.
-
