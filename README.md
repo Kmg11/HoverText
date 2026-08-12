@@ -1,5 +1,7 @@
 # Hover Text
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Kmg11/HoverText/blob/main/LICENSE)
+
 A Windows accessibility tool.
 Hold a modifier key, point at any text on screen, and see it rendered large
 in a floating overlay — using the real text content (via UI Automation),
@@ -130,3 +132,7 @@ This is an MVP with no automated tests; verification is "it compiles and
 runs". UIA quirks vary wildly across apps, so if you hit an app that yields
 no text, the likely culprits are FlaUI pattern access or an app that doesn't
 expose its UI tree.
+
+## License
+
+Released under the [MIT License](LICENSE).

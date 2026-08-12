@@ -12,6 +12,13 @@
     <RootNamespace>HoverText</RootNamespace>
     <StartupObject>HoverText.App</StartupObject>
     <ApplicationIcon>assets\app.ico</ApplicationIcon>
+    <Product>Hover Text</Product>
+    <Authors>Kirolos Mahfouz</Authors>
+    <Company>Kirolos Mahfouz</Company>
+    <Copyright>© 2026 Kirolos Mahfouz</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Kmg11/HoverText</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
