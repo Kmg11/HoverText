@@ -5,6 +5,14 @@ Hold a modifier key, point at any text on screen, and see it rendered large
 in a floating overlay — using the real text content (via UI Automation),
 not a blurry pixel zoom.
 
+Visit the landing page at **<https://Kmg11.github.io/HoverText/>**.
+
+## Screenshots
+
+![Hover Text overlay on hovered text](landing/assets/hero-hover.png)
+
+![Hover Text reading a document](landing/assets/screenshot-document.png)
+
 ## How it works
 
 1. `KeyboardHook.cs` installs a global low-level keyboard hook and fires
