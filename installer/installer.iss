@@ -9,7 +9,7 @@
 #define AppPublisher "Kirolos Mahfouz"
 #define AppId "{{B5F0C7E4-4C0F-4F6A-9A6E-8D0B1E4F2C31}"
 #ifndef AppVersion
-  #define AppVersion "1.0.0"
+  #define AppVersion "0.0.3"
 #endif
 #ifndef PublishDir
   #define PublishDir "..\bin\Release\publish"

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2026-08-12
+
+### Added
+- Open-sourced the project: MIT License, contributing guide, code of
+  conduct, and security policy.
+- GitHub issue templates for bug reports and feature requests.
+- Store-ready brand images: 2160×2160 box art and 1440×2160 poster.
+- Assembly metadata (product, company, copyright, repository URL) in the
+  project file.
+
+### Changed
+- Installer publisher now shows "Kirolos Mahfouz".
+
 ## [0.0.2] - 2026-08-09
 
 ### Added

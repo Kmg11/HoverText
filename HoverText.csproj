@@ -12,6 +12,7 @@
     <RootNamespace>HoverText</RootNamespace>
     <StartupObject>HoverText.App</StartupObject>
     <ApplicationIcon>assets\app.ico</ApplicationIcon>
+    <Version>0.0.3</Version>
     <Product>Hover Text</Product>
     <Authors>Kirolos Mahfouz</Authors>
     <Company>Kirolos Mahfouz</Company>
@@ -65,7 +66,7 @@
 
   <Target Name="BuildInstaller" DependsOnTargets="PublishInstaller">
     <PropertyGroup>
-      <AppVersion Condition="'$(AppVersion)' == ''">1.0.0</AppVersion>
+      <AppVersion Condition="'$(AppVersion)' == ''">0.0.3</AppVersion>
     </PropertyGroup>
     <Exec Command="&quot;$(ISCCPath)&quot; &quot;$(MSBuildProjectDirectory)\installer\installer.iss&quot; /DAppVersion=$(AppVersion) /DPublishDir=&quot;..\publish&quot; /DOutputDir=&quot;..\bin\Release\installer&quot;" />
   </Target>
