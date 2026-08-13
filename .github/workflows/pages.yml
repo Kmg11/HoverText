@@ -1,4 +1,4 @@
-name: pages
+name: Deploy Landing Page
 
 on:
   push:
