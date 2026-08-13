@@ -8,6 +8,9 @@
     <!-- WindowsForms is only used for the tray (NotifyIcon) -->
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>HoverText</AssemblyName>
     <RootNamespace>HoverText</RootNamespace>
     <StartupObject>HoverText.App</StartupObject>

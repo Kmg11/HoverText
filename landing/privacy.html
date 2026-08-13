@@ -1,107 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy — Hover Text</title>
-    <meta name="description"
-          content="Hover Text is fully local and offline. It does not collect, store, or transmit any personal data." />
+    <meta
+      name="description"
+      content="Hover Text is fully local and offline. It does not collect, store, or transmit any personal data."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Privacy Policy — Hover Text" />
     <meta property="og:url" content="https://Kmg11.github.io/HoverText/privacy.html" />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
+  </head>
+  <body>
     <header class="site-header">
-        <nav class="nav container">
-            <a class="brand" href="index.html">
-                <img class="brand-mark" src="assets/brand.png" alt="Hover Text logo" width="34" height="34" />
-                <span class="brand-name">Hover Text</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html#how">How it works</a>
-                <a href="index.html#features">Features</a>
-                <a href="index.html#download">Download</a>
-            </div>
-            <a class="btn btn-primary btn-sm nav-download" href="index.html#download">Download</a>
-        </nav>
+      <nav class="nav container">
+        <a class="brand" href="index.html">
+          <img
+            class="brand-mark"
+            src="assets/brand.png"
+            alt="Hover Text logo"
+            width="34"
+            height="34"
+          />
+          <span class="brand-name">Hover Text</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html#how">How it works</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#download">Download</a>
+        </div>
+        <a class="btn btn-primary btn-sm nav-download" href="index.html#download">Download</a>
+      </nav>
     </header>
 
     <main>
-        <section class="legal">
-            <div class="container legal-box">
-                <h1>Privacy Policy — Hover Text</h1>
-                <p class="legal-date"><strong>Effective date:</strong> August 6, 2026</p>
+      <section class="legal">
+        <div class="container legal-box">
+          <h1>Privacy Policy — Hover Text</h1>
+          <p class="legal-date">
+            <strong>Effective date:</strong>
+            August 6, 2026
+          </p>
 
-                <h2>Overview</h2>
-                <p>Hover Text ("the App", "we", "us") is a Windows desktop accessibility utility that displays on-screen text in a large, readable popup. This Privacy Policy explains how the App handles your information. In short: <strong>Hover Text does not collect, store, or transmit any personal data.</strong> It is a fully local, offline application.</p>
+          <h2>Overview</h2>
+          <p>
+            Hover Text ("the App", "we", "us") is a Windows desktop accessibility utility that
+            displays on-screen text in a large, readable popup. This Privacy Policy explains how the
+            App handles your information. In short:
+            <strong>Hover Text does not collect, store, or transmit any personal data.</strong>
+            It is a fully local, offline application.
+          </p>
 
-                <h2>Data Collection &amp; Processing</h2>
+          <h2>Data Collection &amp; Processing</h2>
 
-                <h3>On-screen text</h3>
-                <p>The App uses Windows UI Automation (via the FlaUI library) to read the text content of the element under the mouse cursor so it can display that text in an overlay window. This inspection happens <strong>entirely in memory on your device</strong>. Screen text is never logged, written to disk, or sent to any server.</p>
+          <h3>On-screen text</h3>
+          <p>
+            The App uses Windows UI Automation (via the FlaUI library) to read the text content of
+            the element under the mouse cursor so it can display that text in an overlay window.
+            This inspection happens
+            <strong>entirely in memory on your device</strong>
+            . Screen text is never logged, written to disk, or sent to any server.
+          </p>
 
-                <h3>Keyboard input</h3>
-                <p>The App installs a low-level keyboard hook solely to detect when the user-configured trigger key or key combination is being held (e.g., holding Left Ctrl to activate the overlay). Keyboard events are examined only to match the trigger, are never recorded, and are discarded immediately. No keystroke content is logged, stored, or transmitted.</p>
+          <h3>Keyboard input</h3>
+          <p>
+            The App installs a low-level keyboard hook solely to detect when the user-configured
+            trigger key or key combination is being held (e.g., holding Left Ctrl to activate the
+            overlay). Keyboard events are examined only to match the trigger, are never recorded,
+            and are discarded immediately. No keystroke content is logged, stored, or transmitted.
+          </p>
 
-                <h2>Local Storage</h2>
-                <p>The App stores your preferences locally on your machine in a single settings file:</p>
-                <ul>
-                    <li><strong>Location:</strong> <code>%LocalAppData%\HoverText\settings.json</code></li>
-                    <li><strong>Contents:</strong> custom trigger keys, overlay font size, max width, cursor-positioning gap, theme preference, clipboard-copy option, and launch-at-startup flag.</li>
-                </ul>
-                <p>If you enable <strong>Launch at startup</strong>, the App registers a standard Windows Run registry value pointing to its own executable. This is a local registry entry on your device.</p>
-                <p>These settings never leave your device and are used only to configure the App's behavior.</p>
+          <h2>Local Storage</h2>
+          <p>The App stores your preferences locally on your machine in a single settings file:</p>
+          <ul>
+            <li>
+              <strong>Location:</strong>
+              <code>%LocalAppData%\HoverText\settings.json</code>
+            </li>
+            <li>
+              <strong>Contents:</strong>
+              custom trigger keys, overlay font size, max width, cursor-positioning gap, theme
+              preference, clipboard-copy option, and launch-at-startup flag.
+            </li>
+          </ul>
+          <p>
+            If you enable
+            <strong>Launch at startup</strong>
+            , the App registers a standard Windows Run registry value pointing to its own
+            executable. This is a local registry entry on your device.
+          </p>
+          <p>
+            These settings never leave your device and are used only to configure the App's
+            behavior.
+          </p>
 
-                <h2>Clipboard</h2>
-                <p>If you enable the optional <strong>"Copy hovered text to clipboard on release"</strong> setting, the App writes the text currently displayed in the overlay to your Windows clipboard when you release the trigger key. This is a user-initiated, opt-in action using your device's standard clipboard — exactly as if you pressed Ctrl+C. The App does not read your clipboard history or any other clipboard contents.</p>
+          <h2>Clipboard</h2>
+          <p>
+            If you enable the optional
+            <strong>"Copy hovered text to clipboard on release"</strong>
+            setting, the App writes the text currently displayed in the overlay to your Windows
+            clipboard when you release the trigger key. This is a user-initiated, opt-in action
+            using your device's standard clipboard — exactly as if you pressed Ctrl+C. The App does
+            not read your clipboard history or any other clipboard contents.
+          </p>
 
-                <h2>Third-Party Sharing</h2>
-                <p>The App does <strong>not</strong> share, sell, rent, or disclose any user data to any third party. It contains no third-party analytics, advertising, or tracking SDKs.</p>
+          <h2>Third-Party Sharing</h2>
+          <p>
+            The App does
+            <strong>not</strong>
+            share, sell, rent, or disclose any user data to any third party. It contains no
+            third-party analytics, advertising, or tracking SDKs.
+          </p>
 
-                <h2>Internet &amp; Data Transmission</h2>
-                <p>The App makes <strong>no network connections</strong> and performs <strong>zero data transmission</strong>. It:</p>
-                <ul>
-                    <li>does not require or use an internet connection;</li>
-                    <li>does not send telemetry, diagnostics, or crash reports;</li>
-                    <li>contains no advertising or tracking;</li>
-                    <li>collects no personal information of any kind.</li>
-                </ul>
-                <p>The only software dependencies are the FlaUI UI Automation libraries, which run locally and do not communicate over the network.</p>
+          <h2>Internet &amp; Data Transmission</h2>
+          <p>
+            The App makes
+            <strong>no network connections</strong>
+            and performs
+            <strong>zero data transmission</strong>
+            . It:
+          </p>
+          <ul>
+            <li>does not require or use an internet connection;</li>
+            <li>does not send telemetry, diagnostics, or crash reports;</li>
+            <li>contains no advertising or tracking;</li>
+            <li>collects no personal information of any kind.</li>
+          </ul>
+          <p>
+            The only software dependencies are the FlaUI UI Automation libraries, which run locally
+            and do not communicate over the network.
+          </p>
 
-                <h2>Data Retention &amp; Deletion</h2>
-                <p>Because the App does not collect any personal data, there is nothing to retain or delete. Removing the App uninstalls its program files; you may additionally delete the <code>%LocalAppData%\HoverText</code> folder to remove your local preferences.</p>
+          <h2>Data Retention &amp; Deletion</h2>
+          <p>
+            Because the App does not collect any personal data, there is nothing to retain or
+            delete. Removing the App uninstalls its program files; you may additionally delete the
+            <code>%LocalAppData%\HoverText</code>
+            folder to remove your local preferences.
+          </p>
 
-                <h2>Children's Privacy</h2>
-                <p>The App does not collect any personal information from anyone, including children under the age of 13.</p>
+          <h2>Children's Privacy</h2>
+          <p>
+            The App does not collect any personal information from anyone, including children under
+            the age of 13.
+          </p>
 
-                <h2>Changes to This Policy</h2>
-                <p>We may update this Privacy Policy from time to time. Any changes will be reflected by updating the "Effective date" above. Since the App performs no data collection, material changes are unlikely.</p>
+          <h2>Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. Any changes will be reflected by
+            updating the "Effective date" above. Since the App performs no data collection, material
+            changes are unlikely.
+          </p>
 
-                <h2>Contact Information</h2>
-                <p>If you have any questions about this Privacy Policy, you may contact us at:</p>
-                <ul>
-                    <li>Developer: <strong>Kirolos Mahfouz</strong></li>
-                    <li>Email: <strong>kirolosmahfouz15@gmail.com</strong></li>
-                    <li>Website: <a href="https://Kmg11.github.io/HoverText/">https://Kmg11.github.io/HoverText/</a></li>
-                </ul>
-            </div>
-        </section>
+          <h2>Contact Information</h2>
+          <p>If you have any questions about this Privacy Policy, you may contact us at:</p>
+          <ul>
+            <li>
+              Developer:
+              <strong>Kirolos Mahfouz</strong>
+            </li>
+            <li>
+              Email:
+              <strong>kirolosmahfouz15@gmail.com</strong>
+            </li>
+            <li>
+              Website:
+              <a href="https://Kmg11.github.io/HoverText/">https://Kmg11.github.io/HoverText/</a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <span class="footer-brand">Hover Text</span>
-            <div class="footer-links">
-                <a href="https://github.com/Kmg11/HoverText" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="privacy.html">Privacy Policy</a>
-            </div>
-            <span class="footer-copy">&copy; <span id="year"></span> Hover Text</span>
+      <div class="container footer-inner">
+        <span class="footer-brand">Hover Text</span>
+        <div class="footer-links">
+          <a href="https://github.com/Kmg11/HoverText" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="privacy.html">Privacy Policy</a>
         </div>
+        <span class="footer-copy">
+          &copy;
+          <span id="year"></span>
+          Hover Text
+        </span>
+      </div>
     </footer>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

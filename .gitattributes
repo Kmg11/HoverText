@@ -3,6 +3,10 @@
 ###############################################################################
 * text=auto
 
+# C# sources are always LF: dotnet format (and CI) writes/enforces LF, so
+# git must expect LF in the working tree or it keeps reporting phantom diffs.
+*.cs text eol=lf
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #

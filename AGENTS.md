@@ -43,7 +43,7 @@ All files are in the project root:
   `VK_LCONTROL`), matching the README and `Config.cs` comments. Note the
   user can now pick any key or chord via Options → Trigger keys; the
   constant is only the fallback default in `Settings.TriggerKeys`.
-- `OptionsWindow` records the trigger via a *second*, temporary
+- `OptionsWindow` records the trigger via a _second_, temporary
   `WH_KEYBOARD_LL` hook (`OptionsWindow.xaml.cs`). Enter finishes, Esc
   cancels; those VK codes are never captured. The recording hook and the
   main app hook can coexist.

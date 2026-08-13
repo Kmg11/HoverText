@@ -1,7 +1,7 @@
 name: Bug report
 description: Report a problem with Hover Text
-title: "[Bug]: "
-labels: ["bug"]
+title: '[Bug]: '
+labels: ['bug']
 body:
   - type: markdown
     attributes:
@@ -22,7 +22,7 @@ body:
     attributes:
       label: Windows version
       description: e.g. Windows 11 24H2, Windows 10 22H2
-      placeholder: "e.g. Windows 11 23H2"
+      placeholder: 'e.g. Windows 11 23H2'
     validations:
       required: true
 
@@ -31,7 +31,7 @@ body:
     attributes:
       label: App(s) where it happens
       description: Which app's text were you hovering over?
-      placeholder: "e.g. Notepad, Visual Studio, Chrome"
+      placeholder: 'e.g. Notepad, Visual Studio, Chrome'
     validations:
       required: true
 
@@ -66,7 +66,7 @@ body:
     attributes:
       label: Relevant settings
       description: Overlay font size, max width, gap, theme, anchored mode, clipboard-copy, trigger keys — anything you changed from defaults.
-      placeholder: "e.g. font size 32, dark theme, Left Ctrl"
+      placeholder: 'e.g. font size 32, dark theme, Left Ctrl'
 
   - type: textarea
     id: screenshots

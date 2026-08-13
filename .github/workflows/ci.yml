@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build (warnings as errors)
+        run: dotnet build HoverText.slnx -c Release
+
+      - name: Verify formatting
+        run: dotnet format HoverText.slnx --verify-no-changes
+
+      - name: NuGet vulnerability audit
+        shell: pwsh
+        run: |
+          $out = dotnet list HoverText.csproj package --vulnerable --include-transitive 2>&1 | Out-String
+          Write-Host $out
+          if ($out -match 'has the following vulnerable packages') {
+            throw 'Vulnerable NuGet packages found.'
+          }
+          Write-Host 'No known vulnerable packages.'
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Check formatting (Prettier)
+        run: npx --yes prettier@3.9.6 --check "*.md" ".github/**/*.yml" "landing/**/*.{html,css,js}" ".prettierrc"
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Check links in README and landing page
+        uses: lycheeverse/lychee-action@v2.5.0
+        with:
+          args: --no-progress --exclude 'linkedin\.com' README.md landing
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

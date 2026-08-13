@@ -1,7 +1,7 @@
 name: Feature request
 description: Suggest an idea for Hover Text
-title: "[Feature]: "
-labels: ["enhancement"]
+title: '[Feature]: '
+labels: ['enhancement']
 body:
   - type: markdown
     attributes:
@@ -29,7 +29,7 @@ body:
     attributes:
       label: Alternatives you've considered
       description: e.g. a workaround, another app's behavior, or a setting you can adjust today.
-      placeholder: "e.g. I currently change the font size manually"
+      placeholder: 'e.g. I currently change the font size manually'
 
   - type: textarea
     id: context

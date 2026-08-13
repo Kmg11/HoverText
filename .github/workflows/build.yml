@@ -16,6 +16,24 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Validate version matches tag
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF -notmatch '^refs/tags/v(\d+\.\d+\.\d+)$') {
+            Write-Host 'Not a version tag; skipping version validation.'
+            exit 0
+          }
+          $tagVersion = $Matches[1]
+          $csproj = [xml](Get-Content HoverText.csproj)
+          $projectVersion = @($csproj.Project.PropertyGroup) |
+            ForEach-Object { $_.Version } |
+            Where-Object { $_ } |
+            Select-Object -First 1
+          if ($projectVersion -ne $tagVersion) {
+            throw "csproj Version ($projectVersion) does not match tag v$tagVersion"
+          }
+          Write-Host "Version OK: v$tagVersion"
+
       - name: Publish single-file EXE
         run: >
           dotnet publish HoverText.csproj -c Release -r win-x64
@@ -38,6 +56,39 @@ jobs:
             /DAppVersion=$ver `
             /DPublishDir=..\publish `
             /DOutputDir=..\bin\Release\installer
+
+      - name: Smoke-test installer (install, launch, uninstall)
+        shell: pwsh
+        run: |
+          $ver = if ($env:GITHUB_REF -match '^refs/tags/v(.+)$') { $Matches[1] } else { '1.0.0' }
+          $installer = "bin\Release\installer\HoverTextSetup-$ver.exe"
+          if (-not (Test-Path $installer)) { throw "Installer not found: $installer" }
+
+          $installDir = Join-Path $env:LOCALAPPDATA "Programs\HoverText"
+          $exe = Join-Path $installDir "HoverText.exe"
+
+          Write-Host "Installing $installer ..."
+          & $installer '/VERYSILENT' '/SUPPRESSMSGBOXES' '/NORESTART' '/TASKS='
+          if ($LASTEXITCODE -ne 0) { throw "Silent install failed with exit code $LASTEXITCODE" }
+          if (-not (Test-Path $exe)) { throw "Installed exe not found: $exe" }
+
+          Write-Host "Launching app ..."
+          $p = Start-Process -FilePath $exe -PassThru
+          Start-Sleep -Seconds 8
+          $p.Refresh()
+          if ($p.HasExited) { throw "App exited during startup (code $($p.ExitCode))" }
+          Write-Host "App is running (pid $($p.Id)); stopping it."
+          Stop-Process -Id $p.Id -Force
+          Get-Process HoverText -ErrorAction SilentlyContinue | Stop-Process -Force
+          Start-Sleep -Seconds 1
+
+          Write-Host "Uninstalling ..."
+          $uninstaller = Join-Path $installDir "unins000.exe"
+          if (-not (Test-Path $uninstaller)) { throw "Uninstaller not found: $uninstaller" }
+          & $uninstaller '/VERYSILENT' '/SUPPRESSMSGBOXES'
+          if ($LASTEXITCODE -ne 0) { throw "Silent uninstall failed with exit code $LASTEXITCODE" }
+          if (Test-Path $installDir) { throw "Install directory still exists after uninstall" }
+          Write-Host "Smoke test passed."
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v7.0.1
@@ -64,7 +115,10 @@ jobs:
             capture && $0 ~ "^## \\[" { exit }
             capture { print }
           ' CHANGELOG.md > release_notes.md
-          test -s release_notes.md || echo "No changelog section for v$VER" >&2
+          if [ ! -s release_notes.md ]; then
+            echo "::error::No CHANGELOG.md section for v$VER — add one before tagging." >&2
+            exit 1
+          fi
 
       - name: Download installer artifact
         uses: actions/download-artifact@v8.0.1
