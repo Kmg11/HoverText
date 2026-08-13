@@ -1,19 +1,13 @@
 # Hover Text
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Kmg11/HoverText/blob/main/LICENSE)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft%20Store-Download-0ac6ef?style=flat-square&logo=microsoft&logoColor=white)](https://apps.microsoft.com/store/detail/XP9JZ6TH8V2H1T)
+[![Website](https://img.shields.io/badge/Landing%20page-Visit-2d9cdb?style=flat-square)](https://Kmg11.github.io/HoverText/)
 
 A Windows accessibility tool.
 Hold a modifier key, point at any text on screen, and see it rendered large
 in a floating overlay — using the real text content (via UI Automation),
 not a blurry pixel zoom.
-
-Visit the landing page at **<https://Kmg11.github.io/HoverText/>**.
-
-## Screenshots
-
-![Hover Text overlay on hovered text](landing/assets/hero-hover.png)
-
-![Hover Text reading a document](landing/assets/screenshot-document.png)
 
 ## How it works
 
